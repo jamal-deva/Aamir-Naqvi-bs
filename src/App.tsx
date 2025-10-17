@@ -188,10 +188,11 @@ gsap.to(mobileElements, {
       });
     }
 
-    // Show contact section on mobile
+    // Show contact section on mobile - trigger earlier
     ScrollTrigger.create({
       trigger: portfolioSectionRef.current,
-      start: "80% bottom",
+      start: "bottom bottom",
+      end: "bottom top",
       onEnter: () => setShowContact(true),
       onLeaveBack: () => setShowContact(false),
     });
@@ -329,7 +330,8 @@ gsap.to(mobileElements, {
         ref={portfolioSectionRef}
         className="relative w-full bg-[#f0f0f0] z-[100] rounded-t-[3rem] rounded-b-[3rem] opacity-100 portfolio-edge-shine"
         style={{
-          minHeight: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '100vh',
+          minHeight: '100vh',
+          paddingBottom: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '0',
           zIndex: 9999,
           boxShadow: `
             0 -20px 60px -15px rgba(255, 255, 255, 0.8),
