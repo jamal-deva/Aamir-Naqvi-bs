@@ -188,14 +188,8 @@ gsap.to(mobileElements, {
       });
     }
 
-    // Show contact section on mobile - trigger earlier
-    ScrollTrigger.create({
-      trigger: portfolioSectionRef.current,
-      start: "bottom bottom",
-      end: "bottom top",
-      onEnter: () => setShowContact(true),
-      onLeaveBack: () => setShowContact(false),
-    });
+    // Show contact section on mobile immediately
+    setShowContact(true);
   }
 
   return () => {
@@ -328,10 +322,11 @@ gsap.to(mobileElements, {
       {/* Portfolio Section */}
       <div
         ref={portfolioSectionRef}
-        className="relative w-full bg-[#f0f0f0] z-[100] rounded-t-[3rem] rounded-b-[3rem] opacity-100 portfolio-edge-shine"
+        className="relative w-full bg-[#f0f0f0] z-[100] rounded-t-[3rem] opacity-100 portfolio-edge-shine"
         style={{
           minHeight: '100vh',
-          paddingBottom: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '0',
+          borderBottomLeftRadius: window.innerWidth < 768 ? '0' : '3rem',
+          borderBottomRightRadius: window.innerWidth < 768 ? '0' : '3rem',
           zIndex: 9999,
           boxShadow: `
             0 -20px 60px -15px rgba(255, 255, 255, 0.8),
@@ -436,10 +431,11 @@ gsap.to(mobileElements, {
       {showContact && (
         <div
           id="contact-section"
-          className={`fixed bottom-0 left-0 right-0 w-full overflow-hidden flex flex-col items-center justify-center z-30 bg-transparent opacity-0 animate-fade-in-delayed`}
+          className={`${window.innerWidth < 768 ? 'relative' : 'fixed bottom-0 left-0 right-0'} w-full overflow-hidden flex flex-col items-center justify-center z-30 bg-[#f0f0f0] opacity-0 animate-fade-in-delayed`}
           style={{
             height: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '100vh',
-            animationDelay: '0.2s', 
+            minHeight: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '100vh',
+            animationDelay: '0.2s',
             animationFillMode: 'forwards',
             pointerEvents: 'auto'
           }}
