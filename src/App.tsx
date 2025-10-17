@@ -105,7 +105,7 @@ const mobileElements = gsap.utils.toArray(".mobile-image");
     // Hide desktop images when portfolio section covers the screen
     gsap.to(desktopElements, {
       opacity: 0,
-      scrollTrigger: { 
+      scrollTrigger: {
         trigger: portfolioSectionRef.current,
         start: "center top",
         end: "top top",
@@ -115,14 +115,14 @@ const mobileElements = gsap.utils.toArray(".mobile-image");
 
 gsap.to(mobileElements, {
       opacity: 0,
-      scrollTrigger: { 
+      scrollTrigger: {
         trigger: portfolioSectionRef.current,
         start: "top top",
-        end: "top center", 
+        end: "top center",
         scrub: 0,
       }
     });
-    
+
     // Create a timeline for desktop images with scroll animation
     gsap.timeline({
       scrollTrigger: {
@@ -166,6 +166,32 @@ gsap.to(mobileElements, {
       trigger: portfolioSectionRef.current,
       start: "center bottom",
       fastScrollEnd: true,
+      onEnter: () => setShowContact(true),
+      onLeaveBack: () => setShowContact(false),
+    });
+  }
+
+  // Mobile-specific scroll handling
+  if (isMobile() && portfolioSectionRef.current) {
+    // Hide arrow on mobile when portfolio section is reached
+    if (arrowRef.current) {
+      gsap.to(arrowRef.current, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: portfolioSectionRef.current,
+          start: "top bottom",
+          end: "top center",
+          scrub: 0,
+          onEnter: () => setShowArrow(false),
+          onLeaveBack: () => setShowArrow(true),
+        }
+      });
+    }
+
+    // Show contact section on mobile
+    ScrollTrigger.create({
+      trigger: portfolioSectionRef.current,
+      start: "80% bottom",
       onEnter: () => setShowContact(true),
       onLeaveBack: () => setShowContact(false),
     });
