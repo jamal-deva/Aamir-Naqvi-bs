@@ -431,7 +431,7 @@ gsap.to(mobileElements, {
       {showContact && (
         <div
           id="contact-section"
-          className={`${window.innerWidth < 768 ? 'relative' : 'fixed bottom-0 left-0 right-0'} w-full overflow-hidden flex flex-col items-center justify-center z-30 bg-[#f0f0f0] opacity-0 animate-fade-in-delayed`}
+          className={`${window.innerWidth < 768 ? 'relative' : 'fixed bottom-0 left-0 right-0'} w-full overflow-hidden flex flex-col items-center justify-center z-30  opacity-0 animate-fade-in-delayed`}
           style={{
             height: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '100vh',
             minHeight: window.innerWidth < 768 ? 'calc(var(--mobile-vh) * 100)' : '100vh',
